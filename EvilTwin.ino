@@ -1,3 +1,10 @@
+
+#This is the actual EvilTwin code with uses 2-Step Deauthentication.
+#This code produces only one EvilTwin network which can causes infiltration TCP-3 linking.
+
+#This code is based on https://github.com/Esser50K/EvilTwinFramework (Please check him out!)
+
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
