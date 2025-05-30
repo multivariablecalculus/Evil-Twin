@@ -1,3 +1,6 @@
+//This is not a Deauth-type :)
+//This is an Evil Twin spoof code, which means it will just make multiple spoofs of the same network, confusing the victim; it does not cause actual harm.
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 extern "C" {
@@ -5,23 +8,23 @@ extern "C" {
 }
 
 const char* ssidList[] = {
-  "Fake_AP_1", "Fake_AP_2", "Fake_AP_3",
-  "Fake_AP_4", "Fake_AP_5", "Fake_AP_6", "Fake_AP_7"
+  "Fake_AP1", "Fake_AP2", "Fake_AP3",
+  "Fake_AP4", "Fake_AP5", "Fake_AP6", "Fake_AP7"
 };
 
 uint8_t beaconPacket[109] = {
-  0x80, 0x00, 0x00, 0x00,                          // Frame Control & Duration
-  0xff, 0xff, 0xff, 0xff, 0xff, 0xff,              // Destination Address (Broadcast)
-  0xde, 0xad, 0xbe, 0xef, 0xde, 0xad,              // Source Address (Randomized MAC)
-  0xde, 0xad, 0xbe, 0xef, 0xde, 0xad,              // BSSID (Same as Source Address)
-  0x00, 0x00,                                      // Sequence Control
-  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // Timestamp (Set Later)
-  0xff, 0xff,                                      // Beacon Interval
-  0x01, 0x04,                                      // Capabilities
-  0x00, 0x00,                                      // SSID Parameter Set (Set Later)
-  0x01, 0x08, 0x82, 0x84, 0x8b, 0x96, 0x24, 0x30, 0x48, 0x6c,  // Supported Rates
-  0x03, 0x01, 0x01,                                // Channel
-  0x05, 0x04, 0x00, 0x02, 0x00, 0x00               // Traffic Indication Map
+  0x80, 0x00, 0x00, 0x00,                          //Frame control, Duration
+  0xff, 0xff, 0xff, 0xff, 0xff, 0xff,              //Destination address
+  0xde, 0xad, 0xbe, 0xef, 0xde, 0xad,              //Src address (MAC)
+  0xde, 0xad, 0xbe, 0xef, 0xde, 0xad,              //BSSID
+  0x00, 0x00,                                      //Sequence control
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  //Timestamp
+  0xff, 0xff,                                      //Beacon interval
+  0x01, 0x04,                                      //Capabilities
+  0x00, 0x00,                                      //SSID paras
+  0x01, 0x08, 0x82, 0x84, 0x8b, 0x96, 0x24, 0x30, 0x48, 0x6c,  //Supported rates
+  0x03, 0x01, 0x01,                                //Channel
+  0x05, 0x04, 0x00, 0x02, 0x00, 0x00               //Traffic induction maps
 };
 
 void setup() {
